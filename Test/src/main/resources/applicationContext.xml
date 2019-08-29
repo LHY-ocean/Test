@@ -29,10 +29,13 @@
     </bean>
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 <!-- 扫描实现类的包 -->
     <context:component-scan base-package="controller"></context:component-scan>
-
+	<context:component-scan base-package="serviceImpl"></context:component-scan>
+	<context:component-scan base-package="dao"></context:component-scan>
+    <!-- 加载其他的配置 -->
+    <import resource="classpath:applicationContext-dao.xml"/>
 </beans>
