@@ -14,15 +14,11 @@ import model.Customer;
 @Repository
 public interface CustomerDao {
 	
-	@Select("select * from customer ${txt}")
-	public List<Customer> select(@Param(value = "txt") String where);
+	public List<Customer> select(String where);
 	
-	@Delete("delete from customer where id=#{id}")
 	public void delete(int id);
 	
-	@Insert("insert into customer(cus_no,cus_name) values(#{cus_no},#{cus_name})")
 	public void insert(Customer c);
 	
-	@Update("update customer set cus_no=#{cus_no} cus_name=#{cus_name} where id=#{id}")
 	public void update(Customer c);
 }
