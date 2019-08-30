@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import model.Customer;
 import service.CustomerService;
+import service.ProductService;
 
 @Controller
 public class CustomerController {
 	
 	@Autowired
 	CustomerService cusService;
+	
+	@Autowired
+	ProductService proServiec;
 	
 	//首页查询显示
 	@RequestMapping("index")
@@ -36,6 +40,8 @@ public class CustomerController {
 	
 	@RequestMapping("add")
 	public String add(ModelMap m) {
+		m.put("cus_sexList",Customer.cus_sexname);
+		m.put("proList", proServiec.select());
 		return "cedit";
 	}
 	@RequestMapping("upd")

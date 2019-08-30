@@ -28,7 +28,7 @@
 		<th>编号</th>
 		<th>姓名</th>
 		<th>性别</th>
-		<th>商品号</th>
+		<th>商品</th>
 		<th>操作</th>
 	</tr>
 	<c:forEach items="${cusList}" var="row">
