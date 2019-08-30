@@ -14,6 +14,11 @@
 		}
 	};
 </script>
+<style type="text/css">
+	td {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 <form action="index.action" method="post">
@@ -21,7 +26,6 @@
 	<button type="submit">查询</button>
 	<button type="button" onclick="window.open('add.action','_self')">新增</button>
 </form>
-
 
 <table> 
 	<tr>
@@ -37,8 +41,8 @@
 		<td>${row.cus_name }</td>
 		<td>${row.cus_sexname }</td>
 		<td>${row.pro_no }</td>
-		<td><a href="upd.action?id=${row.id }">修改</a></td>
-		<td><a href="javascript:del(${row.id })">删除</a></td>
+		<td><a href="upd.action?id=${row.id }">修改</a>
+		    <a href="javascript:del(${row.id })">删除</a></td>
 	</tr>
 	</c:forEach>
 </table>
