@@ -2,7 +2,12 @@ package model;
 
 public class Customer {
 	
-	public static String[] pro_sexs = {"不限","男","女"};
+	public static String[] cus_sexname = {"不限","男","女"};
+	
+	
+	public String getCus_sexname() {
+		return cus_sexname[cus_sex];
+	}
 	
 	private int id;
 	private String cus_no;

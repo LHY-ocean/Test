@@ -14,15 +14,18 @@ import model.Customer;
 @Repository
 public interface CustomerDao {
 	
-	@Select("select * from customer ${txt}")
+	@Select("select customer.*,product.pro_no pro_no from customer inner join product on customer.pro_id = product.id ${txt} order by id")
 	public List<Customer> select(@Param(value = "txt") String where);
+	
+	@Select("select customer.*,product.pro_no pro_no from customer inner join product on customer.pro_id = product.id where customer.id=#{id} ")
+	public Customer selectById(int id);
 	
 	@Delete("delete from customer where id=#{id}")
 	public void delete(int id);
 	
-	@Insert("insert into customer(cus_no,cus_name) values(#{cus_no},#{cus_name})")
+	@Insert("insert into customer(cus_no,cus_name,cus_sex,pro_id) values(#{cus_no},#{cus_name},#{cus_sex},#{pro_id})")
 	public void insert(Customer c);
 	
-	@Update("update customer set cus_no=#{cus_no} cus_name=#{cus_name} where id=#{id}")
+	@Update("update customer set cus_no=#{cus_no}, cus_name=#{cus_name},cus_sex=#{cus_sex},pro_id=#{pro_id} where id=#{id}")
 	public void update(Customer c);
 }

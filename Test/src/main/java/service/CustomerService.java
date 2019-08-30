@@ -8,6 +8,8 @@ public interface CustomerService {
 
 	public List<Customer> select(String where);
 	
+	public Customer selectById(int id);
+	
 	public void delete(int id);
 	
 	public void insert(Customer c);

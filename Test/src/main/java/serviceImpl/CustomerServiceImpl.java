@@ -19,6 +19,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return dao.select(where);
 	}
 	
+	public Customer selectById(int id) {
+		return dao.selectById(id);
+	}
+	
 	public void delete(int id) {
 		dao.delete(id);
 	}

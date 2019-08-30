@@ -25,7 +25,7 @@
             <list>
                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
             </list>
-        </property>
+        </property> 
     </bean>
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
