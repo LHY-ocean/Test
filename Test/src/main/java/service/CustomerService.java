@@ -1,12 +1,11 @@
 package service;
 
-import java.util.List;
-
 import model.Customer;
+import utils.ReturnInfo;
 
 public interface CustomerService {
 
-	public List<Customer> select(String where);
+	public ReturnInfo select(String where,Integer page, Integer max);
 	
 	public Customer selectById(int id);
 	

@@ -1,13 +1,12 @@
 package serviceImpl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.CustomerDao;
 import model.Customer;
 import service.CustomerService;
+import utils.ReturnInfo;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -15,12 +14,18 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	CustomerDao dao;
 	
-	public List<Customer> select(String where) {
-		return dao.select(where);
+	public ReturnInfo select(String where, Integer page, Integer max) {
+		boolean canpage = page != null;
+		ReturnInfo info = new ReturnInfo();
+		info.setList(dao.select(where, ReturnInfo.getLimit(page, max)));
+		if (canpage)
+			info.setCount(dao.search(where));
+		return info;
 	}
 	
+	
 	public Customer selectById(int id) {
-		return dao.selectById(id);
+		return dao.select(" where customer.id="+id, "limit 1").get(0);
 	}
 	
 	public void delete(int id) {

@@ -14,11 +14,11 @@ import model.Customer;
 @Repository
 public interface CustomerDao {
 	
-	@Select("select customer.*,product.pro_no pro_no from customer inner join product on customer.pro_id = product.id ${txt} order by id")
-	public List<Customer> select(@Param(value = "txt") String where);
+	@Select("select count(1) from customer inner join product on customer.pro_id = product.id ${txt}")
+	public int search(@Param(value = "txt") String where);
 	
-	@Select("select customer.*,product.pro_no pro_no from customer inner join product on customer.pro_id = product.id where customer.id=#{id} ")
-	public Customer selectById(int id);
+	@Select("select customer.*,product.pro_no pro_no from customer inner join product on customer.pro_id = product.id ${txt} order by id ${limit}")
+	public List<Customer> select(@Param(value = "txt") String where, @Param(value = "limit") String limit);
 	
 	@Delete("delete from customer where id=#{id}")
 	public void delete(int id);

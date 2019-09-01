@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Customer;
+import model.Product;
 import service.CustomerService;
 import service.ProductService;
+import utils.ReturnInfo;
 
 @Controller
 public class CustomerController {
@@ -22,46 +24,48 @@ public class CustomerController {
 	
 	//首页查询显示
 	@RequestMapping("index")
-	public String index(String txt,ModelMap m) {
+	public @ResponseBody ReturnInfo index(String txt, Integer page, Integer limit) {
 		String where="";
 		if(txt!=null&&txt!="")
 			where=" where cus_name like '%"+txt+"%'";
-		m.put("cusList", cusService.select(where));
-		m.put("txt", txt);
-		return "cindex";
+		return cusService.select(where,page,limit);
 	}
 	
 	//删除
 	@RequestMapping("delete")
-	public String delete(int id,ModelMap m) {
+	public @ResponseBody String delete(int id) {
 		cusService.delete(id);
-		return index(null, m);
+		return "{\"status\":1}";
 	}
 	
-	@RequestMapping("add")
-	public String add(ModelMap m) {
-		m.put("cus_sexList",Customer.cus_sexname);
-		m.put("proList", proServiec.select());
-		return "cedit";
+	@RequestMapping("select")
+	public @ResponseBody Customer select(int id) {
+		return cusService.selectById(id);
 	}
-	@RequestMapping("upd")
-	public String upd(int id,ModelMap m) {
-		m.put("cus", cusService.selectById(id));
-		return add(m);
+	
+	@RequestMapping("getCus_sex")
+	public @ResponseBody String[] getCus_sex() {
+		return Customer.cus_sexname;
 	}
+	
+	@RequestMapping("getProduct")
+	public @ResponseBody List<Product> getProduct() {
+		return proServiec.select();
+	}
+	
 	
 	//新增
 	@RequestMapping("insert")
-	public String insert(Customer c,ModelMap m) {
+	public @ResponseBody String insert(Customer c) {
 		cusService.insert(c);
-		return index(null, m);
+		return "{\"status\":1}";
 	}
 	
 	//修改
 	@RequestMapping("update")
-	public String update(Customer c,ModelMap m) {
+	public @ResponseBody String update(Customer c) {
 		cusService.update(c);
-		return index(null, m);
+		return "{\"status\":1}";
 	}
 	
 }
