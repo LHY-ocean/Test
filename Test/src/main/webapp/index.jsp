@@ -47,9 +47,10 @@
 			table.render({
 				elem : '#demo',
 				height : 462,
-				url : 'index.action' //数据接口
+				url : 'Customer' //数据接口
 				,
 				toolbar : '#toolbarDemo',
+				where: 'post',
 				page : true //开启分页
 				,
 				cols : [ [ //表头
@@ -103,7 +104,7 @@
 				if (obj.event === 'del') { ///lay-event 属性
 					
 					myconfirm("刪除？",function(){
-						$.post("delete.action", {id : data.id}, 
+						$.post("Customer/"+data.id, {_method:'delete'}, 
 								function(json) {
 							reload('demo');
 							layer.close(layer.index);

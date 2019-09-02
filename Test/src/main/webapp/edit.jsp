@@ -17,12 +17,12 @@
 </style>
 
 
-
+<form class="layui-form" lay-filter="myform" action="Customer">
 <c:if test="${param.id==null}">
-<form class="layui-form" lay-filter="myform" action="insert.action">
+<input type="hidden" name="_method" value="post">
 </c:if>
 <c:if test="${param.id!=null}">
-<form class="layui-form" lay-filter="myform" action="update.action">
+<input type="hidden" name="_method" value="put">
 <input type="hidden" name="id" >
 </c:if>
   <div class="layui-form-item">
@@ -76,17 +76,17 @@ layui.use(['form',], function(){
 
 var id="${param.id}";
 function init(){
-	$.post("select.action",{id:id}, function(json) {
+	$.post("Customer/"+id,{_method:'get'}, function(json) {
 		render('myform', json);
-		getarray("getCus_sex.action",{},"[name=cus_sex]",json.cus_sex);
-		getlist("getProduct.action",{},"[name=pro_id]",json.pro_id);
+		getarray("Customer/getCus_sex",{_method:'get'},"[name=cus_sex]",json.cus_sex);
+		getlist("Customer/getProduct",{_method:'get'},"[name=pro_id]",json.pro_id);
 	},"json");
 }
-if(id.length>0){
+if(id!=null&&id.length>0){
 	init();
 }else{
-	getarray("getCus_sex.action",{},"[name=cus_sex]",-1);
-	getlist("getProduct.action",{},"[name=pro_id]",0);
+	getarray("Customer/getCus_sex",{_method:'get'},"[name=cus_sex]",-1);
+	getlist("Customer/getProduct",{_method:'get'},"[name=pro_id]",0);
 }
 
 </script>
